@@ -56,13 +56,15 @@ function build() {
     fi
 }
 
+# boost libraries are included through mapnik
 function install_mason_deps() {
     build mapnik dev &
-    install boost 1.57.0 &
-    install boost_libsystem 1.57.0 &
-    install boost_libthread 1.57.0 &
     install geowave-jace 0.8.7 &
+    install gtest 1.7.0 &
     wait
+
+    # copy mapnik deps to our deps
+    cp -a $(pwd)/mason_packages/.build/mapnik-3.x/mason_packages/.link/. $(pwd)/mason_packages/.link
 }
 
 MASON_LINKED_ABS=$(pwd)/mason_packages/.link
@@ -83,7 +85,8 @@ function make_config() {
       'boost_home': '${MASON_LINKED_REL}',
       'geowave_home': '${MASON_LINKED_REL}',
       'java_home': '${JAVA_HOME}',
-      'mapnik_config': '${MASON_LINKED_REL}/bin/mapnik-config'
+      'mapnik_config': '${MASON_LINKED_REL}/bin/mapnik-config',
+      'gtest_home': '${MASON_LINKED_REL}'
    }
 }" > ./config.gypi
 }
