@@ -1,0 +1,39 @@
+language: cpp
+
+sudo: false
+
+git:
+  depth: 1
+
+env:
+  global:
+   - JAVA_HOME=/usr/lib/jvm/java-7-oracle
+   - LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${JAVA_HOME}/jre/lib/amd64/server
+
+addons:
+  apt:
+    sources:
+     - ubuntu-toolchain-r-test
+     - llvm-toolchain-precise-3.5
+    packages:
+     - clang-3.5
+
+cache: ccache
+
+matrix:
+  include:
+    - os: linux
+      compiler: clang
+      env: JOBS=8
+    - os: linux
+      compiler: gcc
+      env: JOBS=6
+    - os: osx
+      compiler: clang
+      env: JOBS=8
+
+script:
+ - source bootstrap.sh
+ - make
+ - make test
+

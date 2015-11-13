@@ -40,8 +40,24 @@ function install() {
     fi
 }
 
+function build() {
+    MASON_PLATFORM_ID=$(mason env MASON_PLATFORM_ID)
+    if [[ ! -d ./mason_packages/${MASON_PLATFORM_ID}/${1}/${2} ]]; then
+        mason build $1 $2
+        mason link $1 $2
+        if [[ $3 ]]; then
+            LA_FILE=$(${MASON_DIR:-~/.mason}/mason prefix $1 $2)/lib/$3.la
+            if [[ -f ${LA_FILE} ]]; then
+               perl -i -p -e "s/${FIND_PATTERN}/${REPLACE}/g;" ${LA_FILE}
+            else
+                echo "$LA_FILE not found"
+            fi
+        fi
+    fi
+}
+
 function install_mason_deps() {
-    install mapnik 3.0.0 &
+    build mapnik dev &
     install boost 1.57.0 &
     install boost_libsystem 1.57.0 &
     install boost_libthread 1.57.0 &
