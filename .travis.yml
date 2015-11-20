@@ -32,6 +32,9 @@ matrix:
       compiler: clang
       env: JOBS=8
 
+before_install:
+  - git submodule update --init --recursive
+
 script:
  - source bootstrap.sh
  - source ./test/geowave
