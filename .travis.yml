@@ -34,6 +34,10 @@ matrix:
 
 script:
  - source bootstrap.sh
+ - source ./test/geowave
  - make
+ - geowave_start
+ - geowave_ingest
  - make test
+ - geowave_stop
 
