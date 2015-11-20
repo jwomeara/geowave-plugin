@@ -260,8 +260,6 @@ bool geowave_datasource::parse_auths()
                 auths_.push_back(value);
             }
         }
-    } else {
-        auths_.push_back("");
     }
     return success;
 }
@@ -401,8 +399,9 @@ void geowave_datasource::init_layer_descriptor()
                  env->IsAssignableFrom(attrib_class.getClass(), Long::staticGetJavaJniClass().getClass()) || 
                  env->IsAssignableFrom(attrib_class.getClass(), Short::staticGetJavaJniClass().getClass()))
             desc_.add_descriptor(mapnik::attribute_descriptor(name, mapnik::Integer));
-        else if (env->IsAssignableFrom(attrib_class.getClass(), Double::staticGetJavaJniClass().getClass()) || 
-                 env->IsAssignableFrom(attrib_class.getClass(), Float::staticGetJavaJniClass().getClass()))
+        else if (env->IsAssignableFrom(attrib_class.getClass(), Float::staticGetJavaJniClass().getClass()))
+            desc_.add_descriptor(mapnik::attribute_descriptor(name, mapnik::Float));
+        else if (env->IsAssignableFrom(attrib_class.getClass(), Double::staticGetJavaJniClass().getClass()))
             desc_.add_descriptor(mapnik::attribute_descriptor(name, mapnik::Double));
         else if (env->IsAssignableFrom(attrib_class.getClass(), String::staticGetJavaJniClass().getClass()) || 
                  env->IsAssignableFrom(attrib_class.getClass(), Date::staticGetJavaJniClass().getClass()))

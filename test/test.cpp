@@ -167,7 +167,7 @@ TEST(geowave_plugin, fields_and_types)
 
    layer_descriptor ld = ds->get_descriptor();
 
-   EXPECT_EQ("world_merc", ld.get_name());
+   EXPECT_EQ("geowave", ld.get_name());
 
    EXPECT_EQ(11, ld.get_descriptors().size());
 
@@ -192,9 +192,9 @@ TEST(geowave_plugin, fields_and_types)
       else if (attrib.get_name() == "SUBREGION")
          EXPECT_EQ(mapnik::Integer, attrib.get_type());
       else if (attrib.get_name() == "LON")
-         EXPECT_EQ(mapnik::Float, attrib.get_type());
+         EXPECT_EQ(mapnik::Double, attrib.get_type());
       else if (attrib.get_name() == "LAT")
-         EXPECT_EQ(mapnik::Float, attrib.get_type());
+         EXPECT_EQ(mapnik::Double, attrib.get_type());
       else
          EXPECT_EQ(NULL, attrib.get_type());
    }
