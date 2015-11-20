@@ -82,11 +82,11 @@ function make_config() {
 
     echo "{
    'variables': {
-      'boost_home': '${MASON_LINKED_REL}',
-      'geowave_home': '${MASON_LINKED_REL}',
+      'boost_home': '${MASON_LINKED_ABS}',
+      'geowave_home': '${MASON_LINKED_ABS}',
       'java_home': '${JAVA_HOME}',
-      'mapnik_config': '${MASON_LINKED_REL}/bin/mapnik-config',
-      'gtest_home': '${MASON_LINKED_REL}'
+      'mapnik_config': '${MASON_LINKED_ABS}/bin/mapnik-config',
+      'gtest_home': '${MASON_LINKED_ABS}'
    }
 }" > ./config.gypi
 }

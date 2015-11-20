@@ -20,6 +20,9 @@ using mapnik::feature_ptr;
 using mapnik::layer_descriptor;
 using mapnik::datasource_geometry_t;
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+
 TEST(geowave_plugin, envelope)
 {
    parameters p;
@@ -214,6 +217,9 @@ TEST(geowave_plugin, geometry_detection)
 }
 
 int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+  if (datasource_cache::instance().register_datasource(std::string(argv[1]))){
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+  }
+  return -1;
 }
