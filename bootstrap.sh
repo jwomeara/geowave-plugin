@@ -72,6 +72,8 @@ MASON_LINKED_REL=./mason_packages/.link
 export C_INCLUDE_PATH="${MASON_LINKED_ABS}/include"
 export CPLUS_INCLUDE_PATH="${MASON_LINKED_ABS}/include"
 export LIBRARY_PATH="${MASON_LINKED_ABS}/lib"
+export GEOWAVE_RUNTIME_JAR=${MASON_LINKED_ABS}/bin/geowave-jace.jar
+export GEOWAVE_INGEST_JAR=${MASON_LINKED_ABS}/bin/geowave-ingest.jar
 
 function make_config() {
     if [[ $(uname -s) == 'Darwin' ]]; then
