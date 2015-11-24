@@ -25,10 +25,10 @@ matrix:
   include:
     - os: linux
       compiler: clang
-      env: JOBS=8
+      env: JOBS=8 MASON_CONCURRENCY=8
     - os: osx
       compiler: clang
-      env: JOBS=8
+      env: JOBS=8 MASON_CONCURRENCY=8
 
 install:
   - if [[ $(uname -s) == 'Linux' ]]; then
