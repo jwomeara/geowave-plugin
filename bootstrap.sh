@@ -66,7 +66,7 @@ function build_mapnik() {
     cd ..
 
     # link to mapnik deps
-    ln -s $(pwd)/mapnik/mason_packages $(pwd)/mason_packages
+    cp -a $(pwd)/mapnik/mason_packages $(pwd)/mason_packages
 }
 
 # boost libraries are included through mapnik
