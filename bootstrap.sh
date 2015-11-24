@@ -60,8 +60,8 @@ function build_mapnik() {
     git clone --depth 1 https://github.com/mapnik/mapnik.git mapnik
     cd mapnik
     ./bootstrap.sh
-    ./configure
-    make
+    ./configure PREFIX=${MASON_LINKED_ABS}
+    make install
     cd ..
 
     # link to mapnik deps
@@ -95,7 +95,7 @@ function make_config() {
       'boost_home': '${MASON_LINKED_ABS}',
       'geowave_home': '${MASON_LINKED_ABS}',
       'java_home': '${JAVA_HOME}',
-      'mapnik_config': '$(pwd)/mapnik/utils/mapnik-config/mapnik-config',
+      'mapnik_config': '${MASON_LINKED_ABS}/bin/mapnik-config',
       'gtest_home': '${MASON_LINKED_ABS}'
    }
 }" > ./config.gypi
