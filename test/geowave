@@ -47,3 +47,5 @@ geowave_stop() {
     echo "GeoWave is not running ..."
   fi
 }
+
+$@

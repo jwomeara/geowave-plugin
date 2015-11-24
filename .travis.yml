@@ -4,6 +4,7 @@ sudo: false
 
 git:
   depth: 1
+  submodules: true
 
 env:
   global:
@@ -25,22 +26,20 @@ matrix:
     - os: linux
       compiler: clang
       env: JOBS=8
-    - os: linux
-      compiler: gcc
-      env: JOBS=6
     - os: osx
       compiler: clang
       env: JOBS=8
 
-before_install:
-  - git submodule update --init --recursive
+install:
+  - if [[ $(uname -s) == 'Linux' ]]; then
+      export CXX="ccache clang++-3.5 -Qunused-arguments";
+      export CC="ccache clang-3.5 -Qunused-arguments";
+    fi
 
 script:
  - source bootstrap.sh
- - source ./test/geowave
  - make
- - geowave_start
- - geowave_ingest
+ - ./test/geowave geowave_start
+ - ./test/geowave geowave_ingest
  - make test
- - geowave_stop
-
+ - ./test/geowave geowave_stop
