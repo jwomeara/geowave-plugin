@@ -22,6 +22,7 @@ geowave_start() {
     echo "Starting GeoWave ..."
     nohup java -Dinteractive=false -cp $GEOWAVE_RUNTIME_JAR $CLASS_TO_RUN /tmp 2>> /dev/null >> /dev/null &
     echo $! > $PID_PATH_NAME
+    sleep 5
     echo "GeoWave started ..."
   else
     echo "GeoWave is already running ..."
