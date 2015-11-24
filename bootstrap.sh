@@ -57,9 +57,9 @@ function build() {
 }
 
 function build_mapnik() {
-    git clone --depth 1 https://github.com/mapnik/mapnik.git mapnik
+    git clone https://github.com/mapnik/mapnik.git mapnik
     cd mapnik
-    git checkout tags/v.3.0.8
+    git checkout tags/v3.0.8
     ./bootstrap.sh
     ./configure PREFIX=${MASON_LINKED_ABS}
     make install
