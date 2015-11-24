@@ -59,7 +59,7 @@ function build() {
 function build_mapnik() {
     git clone --depth 1 https://github.com/mapnik/mapnik.git mapnik
     cd mapnik
-    source bootstrap.sh
+    ./bootstrap.sh
     ./configure
     make
     cd ..
