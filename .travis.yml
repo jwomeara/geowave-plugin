@@ -25,6 +25,7 @@ matrix:
   include:
     - os: linux
       compiler: clang
+      env: JOBS=8
 
 install:
   - if [[ $(uname -s) == 'Linux' ]]; then
