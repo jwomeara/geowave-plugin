@@ -31,6 +31,6 @@ install: all
 	cp ./build/out/${BUILDTYPE}/lib.target/geowave.input ${INSTALL_PATH}
 
 test: all
-	build/out/Release/geowave-plugin-test ./build/out/${BUILDTYPE}/lib.target/geowave.input
+	./build/out/${BUILDTYPE}/geowave-plugin-test ./build/out/${BUILDTYPE}/lib.target/geowave.input
 
 .PHONY: clean install test
