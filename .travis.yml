@@ -40,3 +40,5 @@ script:
  - ./test/geowave geowave_ingest
  - make test
  - ./test/geowave geowave_stop
+ - ls -ltr ./mason_packages/.link/lib/libmapnik*
+ - ls -ltr ${HOME}/geowave-plugin/mason_packages/.link/lib
