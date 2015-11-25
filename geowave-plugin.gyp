@@ -105,33 +105,33 @@
             }
          ]
       },
-      {
-         'target_name': 'geowave-plugin-test',
-         'type': 'executable',
-         'include_dirs': [
-            '<@(mapnik_includes)',
-            '<(gtest_includes)'
-         ],
-         'sources': [
-            './test/test.cpp'
-         ],
-         'cflags': [
-            '-std=c++11'
-         ],
-         'link_settings': {
-            'libraries': [
-               '-l<(mapnik_name)',
-               '-ljvm',
-               '-lgtest',
-               '-lm',
-               '-lpthread'
-            ],
-            'library_dirs': [
-               '<(mapnik_libs)',
-               '<(java_jvm_lib)',
-               '<(gtest_libs)'
-            ]
-         }
-      }
+#      {
+#         'target_name': 'geowave-plugin-test',
+#         'type': 'executable',
+#         'include_dirs': [
+#            '<@(mapnik_includes)',
+#            '<(gtest_includes)'
+#         ],
+#         'sources': [
+#            './test/test.cpp'
+#         ],
+#         'cflags': [
+#            '-std=c++11'
+#         ],
+#         'link_settings': {
+#            'libraries': [
+#               '-l<(mapnik_name)',
+#               '-ljvm',
+#               '-lgtest',
+#               '-lm',
+#               '-lpthread'
+#            ],
+#            'library_dirs': [
+#               '<(mapnik_libs)',
+#               '<(java_jvm_lib)',
+#               '<(gtest_libs)'
+#            ]
+#         }
+#      }
    ]
 }

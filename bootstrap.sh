@@ -61,7 +61,7 @@ function build_mapnik() {
     cd mapnik
     git checkout tags/v3.0.8
     ./bootstrap.sh
-    ./configure PREFIX=${MASON_LINKED_ABS}
+    ./configure PREFIX=${MASON_LINKED_ABS} PATH_REMOVE='/usr' RUNTIME_LINK='static'
     make install
     cd ..
 
