@@ -77,9 +77,15 @@ TEST(geowave_plugin, features)
    p["table_namespace"]="mapnik";
    p["adapter_id"]="world_merc";
 
+   std::cout << "creating geowave datasource" << std::endl;
+
    std::shared_ptr<datasource> ds = datasource_cache::instance().create(p);
 
+   std::cout << "querying for geowave features" << std::endl;
+
    featureset_ptr fs = ds->features(query(box2d<double>(-180.0, -90.0, 180.0, 90.0)));
+
+   std::cout << "ensuring that feature exists" << std::endl;
 
    EXPECT_NE(feature_ptr(), fs->next());
 }
@@ -95,9 +101,15 @@ TEST(geowave_plugin, features_at_point)
    p["table_namespace"]="mapnik";
    p["adapter_id"]="world_merc";
 
+   std::cout << "creating geowave datasource2" << std::endl;
+
    std::shared_ptr<datasource> ds = datasource_cache::instance().create(p);
 
+   std::cout << "querying for geowave features at point" std::endl;
+
    featureset_ptr fs = ds->features_at_point(coord2d(-77.0164, 38.9047), 0.5);
+
+   std::cout << "getting the next feature" << std::endl;
 
    feature_ptr feature = fs->next();
 
@@ -107,6 +119,8 @@ TEST(geowave_plugin, features_at_point)
       count++;
 
       if (feature->get("UN").to_int() == 840){
+
+         std::cout << "found the feature we were looking for" << std::endl;
          found = true;
          EXPECT_EQ(feature->get("FIPS").to_string(), "US");
          EXPECT_EQ(feature->get("ISO2").to_string(), "US");
@@ -122,6 +136,8 @@ TEST(geowave_plugin, features_at_point)
       }
       feature = fs->next();
    }
+
+   std::cout << "making sure we get expected results" << std::endl;
 
    EXPECT_EQ(count, 6);
    EXPECT_EQ(found, true);
