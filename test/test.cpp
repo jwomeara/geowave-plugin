@@ -105,7 +105,7 @@ TEST(geowave_plugin, features_at_point)
 
    std::shared_ptr<datasource> ds = datasource_cache::instance().create(p);
 
-   std::cout << "querying for geowave features at point" std::endl;
+   std::cout << "querying for geowave features at point" << std::endl;
 
    featureset_ptr fs = ds->features_at_point(coord2d(-77.0164, 38.9047), 0.5);
 

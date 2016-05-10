@@ -38,6 +38,5 @@ script:
  - make
  - ./test/geowave geowave_start
  - ./test/geowave geowave_ingest
- - sleep 15s
  - make test
  - ./test/geowave geowave_stop
