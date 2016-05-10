@@ -31,7 +31,9 @@ geowave_start() {
 
 geowave_ingest() {
   if [ -f $PID_PATH_NAME ]; then
-    java -cp $GEOWAVE_EXAMPLE_JAR:$GEOWAVE_FORMAT_VECTOR_JAR:$GEOWAVE_RUNTIME_JAR:$GEOWAVE_TOOLS_JAR $GEOWAVE_CLI_MAIN -localingest -connectionParams "\"zookeeper=$ZOOKEEPER_URL;user=$USERNAME;password=$PASSWORD;instance=$INSTANCE_NAME\"" -gwNamespace $TABLE_NAMESPACE -f $ADAPTER_TYPE -b $SHAPEFILE
+    java -cp $GEOWAVE_EXAMPLE_JAR:$GEOWAVE_FORMAT_VECTOR_JAR:$GEOWAVE_RUNTIME_JAR:$GEOWAVE_TOOLS_JAR $GEOWAVE_CLI_MAIN config addindex -t spatial spatial
+    java -cp $GEOWAVE_EXAMPLE_JAR:$GEOWAVE_FORMAT_VECTOR_JAR:$GEOWAVE_RUNTIME_JAR:$GEOWAVE_TOOLS_JAR $GEOWAVE_CLI_MAIN config addstore -t accumulo accumulo --gwNamespace $TABLE_NAMESPACE -z $ZOOKEEPER_URL -u $USERNAME -p $PASSWORD -i $INSTANCE_NAME
+    java -cp $GEOWAVE_EXAMPLE_JAR:$GEOWAVE_FORMAT_VECTOR_JAR:$GEOWAVE_RUNTIME_JAR:$GEOWAVE_TOOLS_JAR $GEOWAVE_CLI_MAIN ingest localToGW -f $ADAPTER_TYPE $SHAPEFILE accumulo spatial
   else
     echo "GeoWave is not running ..."
   fi
