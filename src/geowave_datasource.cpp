@@ -505,14 +505,17 @@ mapnik::featureset_ptr geowave_datasource::query(mapnik::box2d<double> const& bo
 
         query_options.setAuthorizations(JArray<String>(auths_));
 
-        SpatialQuery spatial_query = java_new<SpatialQuery>(factory.createPolygon(coordArray));
+        Query query = java_new<SpatialQuery>(factory.createPolygon(coordArray));
 
-        CQLQuery cql_query = java_new<CQLQuery>(spatial_query,
-                                                filter_,
-                                                feature_data_adapter_);
-
+        if (!cql_filter_.empty()) 
+        {
+            query = java_new<CQLQuery>(query,
+                                       filter_,
+                                       feature_data_adapter_);
+        }
+        
         return std::make_shared<geowave_featureset>(accumulo_datastore.query(query_options,
-                                                                             cql_query),
+                                                                             query),
                                                     desc_.get_encoding(),
                                                     ctx_);
     }
